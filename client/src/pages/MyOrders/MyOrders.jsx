@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../api/axiosInstance";
 import "./MyOrders.css";
 
 function MyOrders() {
@@ -10,8 +10,8 @@ function MyOrders() {
     try {
       if (!token) return;
 
-      const res = await axios.get(
-        "http://localhost:5000/api/orders/my-orders",
+      const res = await axiosInstance.get(
+        "/api/orders/my-orders",
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -85,7 +85,7 @@ function MyOrders() {
                 return (
                   <div key={item._id} className="order-item">
                     <img
-                      src={`http://localhost:5000/uploads/${item.food.image}`}
+                      src={`${import.meta.env.VITE_API_URL}/uploads/${item.food.image}`}
                       alt={item.food.name}
                     />
 

@@ -1,11 +1,14 @@
 require('dotenv').config();
-
-// Load environment variables
 const express = require("express");
-// const dotenv = require("dotenv");
-// Initialize env
-// dotenv.config();
 const cors = require("cors");
+const fs = require("fs");
+const path = require("path");
+
+// Create uploads folder if it doesn't exist
+const uploadsDir = path.join(__dirname, "uploads");
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
 // DB connection
 const connectDB = require("./config/db");
@@ -16,8 +19,6 @@ const foodRoutes = require("./routes/foodRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 
-
-
 // Connect database
 connectDB();
 
@@ -25,7 +26,6 @@ connectDB();
 const app = express();
 
 // GLOBAL MIDDLEWARE
-// app.use(cors());
 app.use(cors({
     origin: process.env.CLIENT_URL || "*",
     credentials: true
@@ -46,8 +46,7 @@ app.use("/api/food", foodRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 
-
-//server start
+// server start
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

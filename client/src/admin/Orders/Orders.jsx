@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../../api/axiosInstance";
 import { toast } from "react-toastify";
 import "./Orders.css";
 
@@ -24,7 +24,7 @@ const AdminOrders = () => {
   const fetchOrders = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/api/orders/all", {
+      const res = await axiosInstance.get("/api/orders/all", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setOrders(res.data);
@@ -38,8 +38,8 @@ const AdminOrders = () => {
   const updateStatus = async (orderId, status) => {
     setUpdatingId(orderId);
     try {
-      await axios.put(
-        `http://localhost:5000/api/orders/status/${orderId}`,
+      await axiosInstance.put(
+        `/api/orders/status/${orderId}`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -179,7 +179,7 @@ const AdminOrders = () => {
                             {item.food?.image && (
                               <img
                                 className="ao-item-img"
-                                src={item.food.image}
+                                src={`${import.meta.env.VITE_API_URL}/uploads/${item.food.image}`}
                                 alt={item.food?.name}
                                 onError={(e) => (e.target.style.display = "none")}
                               />

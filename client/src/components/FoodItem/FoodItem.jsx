@@ -13,7 +13,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
             <div className="food-item-img-container">
                 <img
                     className='food-item-image'
-                    src={`http://localhost:5000/uploads/${image}`}
+                    src={`${import.meta.env.VITE_API_URL}/uploads/${image}`}
                     alt={name}
                 />
 

@@ -76,7 +76,7 @@ const App = () => {
           <Routes>
             <Route path="add" element={<Add />} />
             <Route path="list" element={<List />} />
-            <Route path="orders" element={<AdminOrders url="http://localhost:5000" />} />
+            <Route path="orders" element={<AdminOrders url={import.meta.env.VITE_API_URL} />} />
             <Route index element={<Add />} />
           </Routes>
         </div>
