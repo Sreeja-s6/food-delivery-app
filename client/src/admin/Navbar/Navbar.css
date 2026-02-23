@@ -1,0 +1,32 @@
+.admin-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.admin-logo {
+  width: 120px;
+}
+
+.admin-profile-container {
+  position: relative;
+}
+
+.admin-profile {
+  width: 40px;
+  cursor: pointer;
+}
+
+.admin-dropdown {
+  position: absolute;
+  right: 0;
+  top: 50px;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+}
