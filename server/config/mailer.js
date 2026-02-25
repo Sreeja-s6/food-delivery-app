@@ -1,22 +1,22 @@
-const nodemailer = require("nodemailer");
+const SibApiV3Sdk = require("@getbrevo/brevo");
 
-const transporter = nodemailer.createTransport({
-    host: "smtp-relay.brevo.com",
-    port: 587,
-    secure: false,
-    auth: {
-        user: process.env.BREVO_USER,
-        pass: process.env.BREVO_PASS
-    }
-});
+const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+apiInstance.setApiKey(
+    SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
+    process.env.BREVO_API_KEY
+);
 
-// Verify connection
-transporter.verify((error, success) => {
-    if (error) {
-        console.log("SMTP Error:", error);
-    } else {
-        console.log("SMTP Server ready to send emails!");
-    }
-});
+const sendEmail = async ({ to, subject, text }) => {
+    const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
+    sendSmtpEmail.subject = subject;
+    sendSmtpEmail.textContent = text;
+    sendSmtpEmail.sender = {
+        name: "Food Delivery App",
+        email: process.env.EMAIL
+    };
+    sendSmtpEmail.to = [{ email: to }];
 
-module.exports = transporter;
+    await apiInstance.sendTransacEmail(sendSmtpEmail);
+};
+
+module.exports = { sendEmail };

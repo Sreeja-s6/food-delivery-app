@@ -1,8 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const transporter = require("../config/mailer");
-// const crypto = require("crypto");
+const { sendEmail } = require("../config/mailer");
 
 // GENERATE OTP
 const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
@@ -10,8 +9,6 @@ const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString()
 // SIGNUP
 exports.signup = async (req, res) => {
     try {
-    //    const { name, email, password, phone } = req.body;
-
         const { name, email, password } = req.body;
 
         const userExists = await User.findOne({ email });
@@ -25,7 +22,6 @@ exports.signup = async (req, res) => {
             name,
             email,
             password: hashedPassword,
-            // phone,
             otp,
             otpExpiry: Date.now() + 10 * 60 * 1000,
             isVerified: false
@@ -33,9 +29,7 @@ exports.signup = async (req, res) => {
 
         await user.save();
 
-        // Send OTP email
-        await transporter.sendMail({
-            from: process.env.EMAIL,
+        await sendEmail({
             to: email,
             subject: "Verify your email",
             text: `Your OTP is ${otp}`
@@ -78,9 +72,7 @@ exports.verifyEmailOTP = async (req, res) => {
     }
 };
 
-// LOGIN STEP 1 (email + password)
-// SEND LOGIN OTP
-
+// LOGIN STEP 1
 exports.login_2fa = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -104,9 +96,7 @@ exports.login_2fa = async (req, res) => {
         user.loginOTPExpiry = Date.now() + 5 * 60 * 1000;
         await user.save();
 
-        // Send OTP via email
-        await transporter.sendMail({
-            from: process.env.EMAIL,
+        await sendEmail({
             to: user.email,
             subject: "Your login OTP",
             text: `Your login OTP is ${otp}`
@@ -167,7 +157,7 @@ exports.forgotPassword = async (req, res) => {
         const user = await User.findOne({ email });
 
         if (!user)
-            return res.status(400).json({ messgae: "User not found" });
+            return res.status(400).json({ message: "User not found" });
 
         const otp = generateOTP();
 
@@ -175,8 +165,7 @@ exports.forgotPassword = async (req, res) => {
         user.resetPasswordExpires = Date.now() + 10 * 60 * 1000;
         await user.save();
 
-        await transporter.sendMail({
-            from: process.env.EMAIL,
+        await sendEmail({
             to: user.email,
             subject: "Reset password OTP",
             text: `Your OTP is ${otp}`
@@ -200,7 +189,7 @@ exports.resetPassword = async (req, res) => {
             return res.status(400).json({ message: "Invalid request" });
 
         if (user.resetPasswordOTP !== otp)
-            return res.status(400).json({message: "Invalid OTP" });
+            return res.status(400).json({ message: "Invalid OTP" });
 
         if (Date.now() > user.resetPasswordExpires)
             return res.status(400).json({ message: "OTP expired" });
@@ -211,7 +200,7 @@ exports.resetPassword = async (req, res) => {
 
         await user.save();
 
-        res.json({ messgae: "Password reset successfull" });
+        res.json({ message: "Password reset successful" });
 
     } catch (error) {
         res.status(500).json({ message: "Reset password failed" });
