@@ -1,20 +1,19 @@
-const Brevo = require("@getbrevo/brevo");
-
-let apiInstance = new Brevo.TransactionalEmailsApi();
-apiInstance.authentications['apiKey'].apiKey = process.env.BREVO_API_KEY;
+const { Brevo } = require("@getbrevo/brevo");
 
 const sendEmail = async ({ to, subject, text }) => {
-    let sendSmtpEmail = new Brevo.SendSmtpEmail();
-    
-    sendSmtpEmail.subject = subject;
-    sendSmtpEmail.textContent = text;
-    sendSmtpEmail.sender = {
-        name: "Food Delivery App",
-        email: process.env.EMAIL
-    };
-    sendSmtpEmail.to = [{ email: to }];
-
-    await apiInstance.sendTransacEmail(sendSmtpEmail);
+    await Brevo.transactionalEmails.send({
+        subject: subject,
+        textContent: text,
+        sender: {
+            name: "Food Delivery App",
+            email: process.env.EMAIL
+        },
+        to: [{ email: to }]
+    }, {
+        headers: {
+            "api-key": process.env.BREVO_API_KEY
+        }
+    });
 };
 
 module.exports = { sendEmail };
