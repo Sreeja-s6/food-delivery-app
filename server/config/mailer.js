@@ -1,7 +1,11 @@
-const { Brevo } = require("@getbrevo/brevo");
+const { BrevoClient } = require("@getbrevo/brevo");
+
+const client = new BrevoClient({
+    apiKey: process.env.BREVO_API_KEY
+});
 
 const sendEmail = async ({ to, subject, text }) => {
-    await Brevo.transactionalEmails.send({
+    await client.transactionalEmails.send({
         subject: subject,
         textContent: text,
         sender: {
@@ -9,10 +13,6 @@ const sendEmail = async ({ to, subject, text }) => {
             email: process.env.EMAIL
         },
         to: [{ email: to }]
-    }, {
-        headers: {
-            "api-key": process.env.BREVO_API_KEY
-        }
     });
 };
 
