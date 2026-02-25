@@ -1,19 +1,24 @@
-const { BrevoClient } = require("@getbrevo/brevo");
-
-const client = new BrevoClient({
-    apiKey: process.env.BREVO_API_KEY
-});
+const axios = require("axios");
 
 const sendEmail = async ({ to, subject, text }) => {
-    await client.transactionalEmails.send({
-        subject: subject,
-        textContent: text,
-        sender: {
-            name: "Food Delivery App",
-            email: process.env.EMAIL
+    await axios.post(
+        "https://api.brevo.com/v3/smtp/email",
+        {
+            sender: {
+                name: "Food Delivery App",
+                email: process.env.EMAIL
+            },
+            to: [{ email: to }],
+            subject: subject,
+            textContent: text
         },
-        to: [{ email: to }]
-    });
+        {
+            headers: {
+                "api-key": process.env.BREVO_API_KEY,
+                "Content-Type": "application/json"
+            }
+        }
+    );
 };
 
 module.exports = { sendEmail };
