@@ -1,6 +1,7 @@
 import basket_icon from './basket_icon.png'
 import logo from './logo.png'
 import logo2 from './logo2.png'
+import logo3 from './logo3.png'
 import header_img from './header_img.png'
 import upload_area from './upload_area.jpg'
 import profile_image from './profile_image.jpg'
@@ -69,6 +70,7 @@ import parcel_icon from './parcel_icon.png'
 export const assets = {
     logo,
     logo2,
+    logo3,
     basket_icon,
     header_img,
     upload_area,
@@ -332,7 +334,7 @@ export const food_list = [
         category: "Pasta"
     }, {
         _id: "29",
-        name: "Buttter Noodles",
+        name: "Butter Noodles",
         image: food_29,
         price: 14,
         description: "Food provides essential nutrients for overall health and well-being",

@@ -48,7 +48,7 @@ const StoreContextProvider = (props) => {
     // Auto refresh food list every 30 seconds
     const interval = setInterval(() => {
         fetchFoods();
-    }, 30000);
+    }, 10000);
 
     // Cleanup on unmount
     return () => clearInterval(interval);

@@ -23,11 +23,36 @@
     padding: 8px 10px;
     border-radius: 3px 0px 0px 3px;
     cursor: pointer;
+    /* Fix Bootstrap overrides */
+    color: #49557e !important;
+    text-decoration: none !important;
+    background-color: transparent;
 }
 
-.sidebar-option .active {
-    background-color: #fff0ed;
-    border-color: tomato;
+.sidebar-option:hover {
+    background-color: #fff0ed !important;
+    border-color: tomato !important;
+    color: tomato !important;
+}
+
+.sidebar-option.active {
+    background-color: #fff0ed !important;
+    border-color: tomato !important;
+    color: tomato !important;
+}
+
+.sidebar-option p {
+    color: #49557e;
+    font-size: max(1vw, 14px);
+    margin: 0;
+}
+
+.sidebar-option.active p {
+    color: tomato;
+}
+
+.sidebar-option:hover p {
+    color: tomato;
 }
 
 @media (max-width:900px) {
