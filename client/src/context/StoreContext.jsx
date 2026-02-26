@@ -41,10 +41,18 @@ const StoreContextProvider = (props) => {
     }
   };
 
-  useEffect(() => {
+ useEffect(() => {
     fetchFoods();
     fetchCart();
-  }, []);
+
+    // Auto refresh food list every 30 seconds
+    const interval = setInterval(() => {
+        fetchFoods();
+    }, 30000);
+
+    // Cleanup on unmount
+    return () => clearInterval(interval);
+}, []);
 
   /* ================= ADD TO CART ================= */
   const addToCart = async (itemId) => {
