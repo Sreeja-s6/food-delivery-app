@@ -154,6 +154,10 @@ const StoreContextProvider = (props) => {
     return totalAmount;
   };
 
+  const refreshFoods = async () => {
+    await fetchFoods();
+};
+
   const contextValue = {
     food_list,
     cartItems,
@@ -161,7 +165,8 @@ const StoreContextProvider = (props) => {
     decreaseQuantity,
     removeItemCompletely,
     clearCart,
-    getTotalCartAmount
+    getTotalCartAmount,
+    refreshFoods
   };
 
   return (
