@@ -169,6 +169,28 @@ exports.updateOrderStatus = async (req, res) => {
             return res.status(404).json({ message: "Order not found" });
         }
 
+        // ✅ Strict status flow
+        const statusFlow = {
+            "pending": "confirmed",
+            "confirmed": "out for delivery",
+            "out for delivery": "delivered"
+        };
+
+        if (status === "cancelled") {
+            if (!["pending", "confirmed"].includes(order.status)) {
+                return res.status(400).json({
+                    message: "Order cannot be cancelled at this stage"
+                });
+            }
+        } else {
+            const expectedNext = statusFlow[order.status];
+            if (status !== expectedNext) {
+                return res.status(400).json({
+                    message: `Cannot update. Next valid status is "${expectedNext}"`
+                });
+            }
+        }
+
         order.status = status;
         await order.save();
 

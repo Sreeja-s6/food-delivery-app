@@ -250,6 +250,16 @@
   padding-left: 24px;
 }
 
+/* Locked final status */
+.ao-locked {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
 @media (max-width: 700px) {
   .ao-col-left { border-right: none; border-bottom: 1px solid #f3f4f6; padding-right: 0; padding-bottom: 18px; }
   .ao-col-right { padding-left: 0; padding-top: 18px; }

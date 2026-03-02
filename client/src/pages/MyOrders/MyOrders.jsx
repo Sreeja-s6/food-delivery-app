@@ -37,7 +37,20 @@ function MyOrders() {
 
   useEffect(() => {
     fetchOrders();
-  }, []);
+
+    // Refetch when user comes back to this tab
+    const handleVisibilityChange = () => {
+        if (document.visibilityState === "visible") {
+            fetchOrders();
+        }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+}, []);
 
   if (loading) {
     return (
