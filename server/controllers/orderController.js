@@ -169,7 +169,7 @@ exports.updateOrderStatus = async (req, res) => {
             return res.status(404).json({ message: "Order not found" });
         }
 
-        // ✅ Strict status flow
+        // Strict status flow
         const statusFlow = {
             "pending": "confirmed",
             "confirmed": "out for delivery",
@@ -194,7 +194,7 @@ exports.updateOrderStatus = async (req, res) => {
         order.status = status;
         await order.save();
 
-        // Send email when order is delivered
+        // ✅ Only send email when delivered
         if (status === "delivered" && order.user?.email) {
             await sendEmail({
                 to: order.user.email,
@@ -211,25 +211,6 @@ Total Amount: ₹${order.totalAmount}
 
 We hope you enjoy your meal! 🍽️
 Please order again soon.
-
-Thank you for choosing Foodie!
-
-Best regards,
-Team Foodie`
-            });
-        }
-
-        // Send email when order is confirmed
-        if (status === "confirmed" && order.user?.email) {
-            await sendEmail({
-                to: order.user.email,
-                subject: "✅ Your Order Has Been Confirmed - Foodie",
-                text: `Hi ${order.user.name},
-
-Your order has been confirmed! ✅
-
-Order ID: ${order._id}
-We are preparing your food and will deliver it soon! 🚴
 
 Thank you for choosing Foodie!
 
