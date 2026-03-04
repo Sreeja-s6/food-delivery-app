@@ -42,8 +42,8 @@ const Navbar = ({ setShowLogin }) => {
                 <ul className="navbar-menu">
                     <Link to='/' onClick={() => setMenu("Home")} className={menu === "Home" ? "active" : ""}>Home</Link>
                     <a href='#explore-menu' onClick={() => setMenu("Menu")} className={menu === "Menu" ? "active" : ""}>Menu</a>
-                    <a href='#' onClick={() => setMenu("About")} className={menu === "About" ? "active" : ""}>About</a>
-                    <a href='#' onClick={() => setMenu("Contact")} className={menu === "Contact" ? "active" : ""}>Contact</a>
+                    <a href='#footer' onClick={() => setMenu("About")} className={menu === "About" ? "active" : ""}>About</a>
+                    <a href='#footer' onClick={() => setMenu("Contact")} className={menu === "Contact" ? "active" : ""}>Contact</a>
                 </ul>
 
                 <div className="navbar-right">
@@ -97,8 +97,8 @@ const Navbar = ({ setShowLogin }) => {
                 <div className={`mobile-menu ${darkMode ? "dark" : ""}`}>
                     <Link to='/' onClick={() => handleMenuClick("Home")} className={menu === "Home" ? "active" : ""}>Home</Link>
                     <a href='#explore-menu' onClick={() => handleMenuClick("Menu")} className={menu === "Menu" ? "active" : ""}>Menu</a>
-                    <a href='#' onClick={() => handleMenuClick("About")} className={menu === "About" ? "active" : ""}>About</a>
-                    <a href='#' onClick={() => handleMenuClick("Contact")} className={menu === "Contact" ? "active" : ""}>Contact</a>
+                    <a href='#footer' onClick={() => handleMenuClick("About")} className={menu === "About" ? "active" : ""}>About</a>
+                    <a href='#footer' onClick={() => handleMenuClick("Contact")} className={menu === "Contact" ? "active" : ""}>Contact</a>
                 </div>
             )}
         </>
