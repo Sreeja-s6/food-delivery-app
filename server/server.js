@@ -4,11 +4,6 @@ const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
 
-// Create uploads folder if it doesn't exist
-const uploadsDir = path.join(__dirname, "uploads");
-if (!fs.existsSync(uploadsDir)) {
-    fs.mkdirSync(uploadsDir, { recursive: true });
-}
 
 // DB connection
 const connectDB = require("./config/db");
@@ -35,8 +30,6 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Serve uploaded images statically
-app.use("/uploads", express.static("uploads"));
 
 // test route
 app.get("/", (req, res) => {

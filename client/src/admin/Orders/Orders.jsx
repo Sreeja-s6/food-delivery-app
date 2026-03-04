@@ -210,7 +210,7 @@ const AdminOrders = () => {
                             {item.food?.image && (
                               <img
                                 className="ao-item-img"
-                                src={`${import.meta.env.VITE_API_URL}/uploads/${item.food.image}`}
+                                src={item.food.image}
                                 alt={item.food?.name}
                                 onError={(e) => (e.target.style.display = "none")}
                               />

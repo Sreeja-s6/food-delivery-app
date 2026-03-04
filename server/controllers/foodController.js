@@ -1,19 +1,19 @@
 const Food = require("../models/Food");
+const { cloudinary } = require("../config/multer");
 
 // ADD FOOD (Admin)
 exports.createFood = async (req, res) => {
     try {
         const { name, description, price, category } = req.body;
 
-        const image = req.file ? req.file.path : "";
-
         const food = new Food({
             name,
             description,
             price: Number(price),
             category,
-            image: req.file ? req.file.filename : null,
-            createdBy: req.user.userId // admin id from JWT
+            image: req.file ? req.file.path : null,        // ✅ Cloudinary URL
+            imagePublicId: req.file ? req.file.filename : null, // ✅ for deletion
+            createdBy: req.user.userId
         });
 
         await food.save();
@@ -41,12 +41,9 @@ exports.getAllFood = async (req, res) => {
 exports.getFoodById = async (req, res) => {
     try {
         const food = await Food.findById(req.params.id);
-
         if (!food)
             return res.status(404).json({ message: "Food not found" });
-
         res.json(food);
-
     } catch (error) {
         res.status(500).json({ message: "Error fetching food" });
     }
@@ -56,15 +53,18 @@ exports.getFoodById = async (req, res) => {
 exports.updateFood = async (req, res) => {
     try {
         const { name, description, price, category } = req.body;
-
         const food = await Food.findById(req.params.id);
 
         if (!food)
             return res.status(404).json({ message: "Food not found" });
 
+        // If new image uploaded, delete old from Cloudinary
         if (req.file) {
-            // food.image = req.file.path;
-            food.image = req.file.filename;
+            if (food.imagePublicId) {
+                await cloudinary.uploader.destroy(food.imagePublicId);
+            }
+            food.image = req.file.path;             // ✅ new Cloudinary URL
+            food.imagePublicId = req.file.filename; // ✅ new public id
         }
 
         food.name = name || food.name;
@@ -82,8 +82,6 @@ exports.updateFood = async (req, res) => {
 };
 
 // DELETE FOOD (Admin)
-const fs = require("fs");
-
 exports.deleteFood = async (req, res) => {
     try {
         const food = await Food.findById(req.params.id);
@@ -91,12 +89,9 @@ exports.deleteFood = async (req, res) => {
         if (!food)
             return res.status(404).json({ message: "Food not found" });
 
-        // delete image from uploads folder
-        if (food.image) {
-            fs.unlink(food.image, (err) => {
-                if (err)
-                    console.log("Image delete error:", err);
-            });
+        // ✅ Delete image from Cloudinary
+        if (food.imagePublicId) {
+            await cloudinary.uploader.destroy(food.imagePublicId);
         }
 
         await food.deleteOne();

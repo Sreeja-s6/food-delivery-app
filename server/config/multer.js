@@ -1,33 +1,25 @@
 const multer = require("multer");
-const path = require("path");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("cloudinary").v2;
 
-// storage config
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "uploads/");  // store images in uploads folder
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
+// Configure Cloudinary
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+// Cloudinary storage
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: "foodie-app",
+        allowed_formats: ["jpg", "jpeg", "png", "webp"],
+        transformation: [{ width: 500, height: 500, crop: "fill" }]
     }
 });
 
-// file filter (only images allowed)
-const fileFilter = (req, file, cb) => {
-    const allowedTypes = /jpg|jpeg|png|webp/;
-
-    const isValid = 
-        allowedTypes.test(file.mimetype) &&
-        allowedTypes.test(path.extname(file.originalname).toLowerCase());
-
-    if (isValid)
-        cb(null, true);
-    else 
-        cb(new Error("Only images are allowed"), false);
-};
-
-const upload = multer({
-    storage,
-    fileFilter
-});
+const upload = multer({ storage });
 
 module.exports = upload;
+module.exports.cloudinary = cloudinary;
