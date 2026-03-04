@@ -119,6 +119,7 @@ const List = () => {
         <div className="list-table-format title">
           <b>Image</b>
           <b>Name</b>
+          <b>Description</b>
           <b>Category</b>
           <b>Price</b>
           <b>Action</b>
@@ -128,6 +129,7 @@ const List = () => {
           <div key={index} className='list-table-format'>
             <img src={item.image} alt="" />
             <p>{item.name}</p>
+            <p>{item.description}</p>
             <p>{item.category}</p>
             <p>₹{item.price}</p>
             <div style={{ display: "flex", gap: "10px" }}>
