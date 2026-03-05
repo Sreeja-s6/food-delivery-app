@@ -66,10 +66,17 @@ const App = () => {
   // ADMIN LAYOUT
   const AdminLayout = () => {
 
+    useEffect(() => {
+        document.body.style.paddingTop = "0";
+        return () => {
+            document.body.style.paddingTop = "70px";
+        }
+    }, []);
+
+
     return (
       <>
         <AdminNavbar />
-        <hr />
         <div className="app-content">
           <ToastContainer autoClose={2000} /> 
           <Sidebar />

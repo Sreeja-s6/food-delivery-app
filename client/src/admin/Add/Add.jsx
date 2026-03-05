@@ -7,8 +7,8 @@ import { toast } from "react-toastify"
 function Add() {
 
     const url = import.meta.env.VITE_API_URL
-
     const [image, setImage] = useState(false)
+    const [submitting, setSubmitting] = useState(false) // ✅ loading state
 
     const [data, setData] = useState({
         name: "",
@@ -17,14 +17,12 @@ function Add() {
         category: "Salad"
     })
 
-    // Handle input changes
     const onChangeHandler = (event) => {
         const name = event.target.name;
         const value = event.target.value;
         setData(prev => ({ ...prev, [name]: value }))
     }
 
-    // Submit form
     const onSubmitHandler = async (event) => {
         event.preventDefault();
 
@@ -32,6 +30,11 @@ function Add() {
             toast.error("Please upload an image");
             return;
         }
+
+        setSubmitting(true); // ✅ show loading immediately
+
+        // ✅ Show uploading toast immediately
+        const loadingToast = toast.loading("Uploading food item...");
 
         try {
             const formData = new FormData();
@@ -53,9 +56,14 @@ function Add() {
             );
 
             if (response.data) {
-                toast.success("Food added successfully");
+                // ✅ Update loading toast to success
+                toast.update(loadingToast, {
+                    render: "Food added successfully! 🎉",
+                    type: "success",
+                    isLoading: false,
+                    autoClose: 3000
+                });
 
-                // Reset form
                 setData({
                     name: "",
                     description: "",
@@ -67,9 +75,15 @@ function Add() {
 
         } catch (error) {
             console.error(error);
-            toast.error(
-                error.response?.data?.message || "Failed to add food"
-            );
+            // ✅ Update loading toast to error
+            toast.update(loadingToast, {
+                render: error.response?.data?.message || "Failed to add food",
+                type: "error",
+                isLoading: false,
+                autoClose: 3000
+            });
+        } finally {
+            setSubmitting(false); // ✅ reset loading
         }
     }
 
@@ -123,7 +137,6 @@ function Add() {
 
                 {/* Category & Price */}
                 <div className="add-category-price">
-
                     <div className="add-category flex-col">
                         <p>Category</p>
                         <select onChange={onChangeHandler} name="category" value={data.category}>
@@ -149,10 +162,17 @@ function Add() {
                             required
                         />
                     </div>
-
                 </div>
 
-                <button type='submit' className='add-btn'>ADD</button>
+                {/* ✅ Button shows loading state */}
+                <button
+                    type='submit'
+                    className='add-btn'
+                    disabled={submitting}
+                    style={{ opacity: submitting ? 0.7 : 1, cursor: submitting ? "not-allowed" : "pointer" }}
+                >
+                    {submitting ? "Uploading..." : "ADD"}
+                </button>
 
             </form>
         </div>

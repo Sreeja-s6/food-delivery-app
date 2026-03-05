@@ -1,13 +1,12 @@
 .sidebar {
     width: 18%;
     min-height: 100vh;
-    border: 1.5px solid #a9a9a9;
-    border-top: 0;
-    font-size: max(1vw,10px);
+    border-right: 1.5px solid #e0e0e0;
+    font-size: max(1vw, 10px);
 }
 
 .sidebar-options {
-    padding-top: 50px;
+    padding-top: 20px;      /* ✅ reduced from 50px */
     padding-left: 20%;
     display: flex;
     flex-direction: column;
@@ -23,7 +22,6 @@
     padding: 8px 10px;
     border-radius: 3px 0px 0px 3px;
     cursor: pointer;
-    /* Fix Bootstrap overrides */
     color: #49557e !important;
     text-decoration: none !important;
     background-color: transparent;
@@ -55,7 +53,7 @@
     color: tomato;
 }
 
-@media (max-width:900px) {
+@media (max-width: 900px) {
     .sidebar-option p {
         display: none;
     }
