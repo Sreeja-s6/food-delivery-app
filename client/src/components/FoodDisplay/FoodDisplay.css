@@ -36,3 +36,14 @@
     }
 }
 
+@media (max-width: 360px) {
+    .food-display-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        row-gap: 20px;
+    }
+
+    .food-display h2 {
+        font-size: 18px;
+    }
+}
