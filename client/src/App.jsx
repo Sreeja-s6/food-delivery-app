@@ -5,6 +5,7 @@ import Home from './pages/Home/Home'
 import Cart from './pages/Cart/Cart'
 import PlaceOrder from './pages/PlaceOrder/PlaceOrder'
 import MyOrders from "./pages/MyOrders/MyOrders";
+import FoodDetail from './components/FoodDetail/FoodDetail'
 import LoginPopup from './components/LoginPopup/LoginPopup'
 import Footer from './components/Footer/Footer'
 import { ToastContainer } from 'react-toastify';
@@ -103,6 +104,7 @@ const App = () => {
             <Route path='/cart' element={<Cart />} />
             <Route path='/order' element={<PlaceOrder />} />
             <Route path="/my-orders" element={<MyOrders />} />
+            <Route path="/food/:id" element={<FoodDetail />} />
           </Routes>
         </div>
         <Footer />
