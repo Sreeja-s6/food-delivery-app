@@ -4,6 +4,8 @@
     background: url('/header_img.png') no-repeat;
     background-size: contain;
     position: relative;
+    border-radius: 15px;
+    min-height: 200px;
 }
 
 .header-contents {
@@ -21,7 +23,7 @@
 .header-contents h2 {
     font-weight: 500;
     color: white;
-    font-size: max(4.5vw,22px);
+    font-size: max(4.5vw, 22px);
 }
 
 .header-contents p {
@@ -29,30 +31,95 @@
     font-size: 1.2vw;
 }
 
-.header-contents button {
+.header-contents a {
     border: none;
+    text-decoration: none;
     color: #747474;
     font-weight: 500;
     padding: 1vw 2.3vw;
     background-color: white;
-    font-size: max(1vw,13px);
+    font-size: max(1vw, 13px);
     border-radius: 50px;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-@media (max-width:1050px) {
+.header-contents a:hover {
+    background-color: #f0f0f0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1050px) {
     .header-contents {
-        max-width: 45%;
+        max-width: 50%;
+        gap: 1.5vw;
+    }
+
+    .header-contents p {
+        font-size: 1.4vw;
     }
 }
 
-@media (max-width:750px) {
+@media (max-width: 750px) {
+    .header {
+        height: 45vw;
+        margin: 20px auto;
+        background-size: cover;
+        background-position: center;
+    }
+
     .header-contents {
         max-width: 65%;
+        gap: 2vw;
+        bottom: 8%;
     }
+
     .header-contents p {
         display: none;
     }
-    .header-contents button {
+
+    .header-contents a {
         padding: 2vw 4vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        height: 60vw;
+        margin: 15px auto;
+        background-size: cover;
+        background-position: center;
+        border-radius: 10px;
+    }
+
+    .header-contents {
+        max-width: 75%;
+        gap: 3vw;
+        bottom: 12%;
+        left: 5vw;
+    }
+
+    .header-contents h2 {
+        font-size: max(5vw, 18px);
+    }
+
+    .header-contents a {
+        padding: 2.5vw 5vw;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 360px) {
+    .header {
+        height: 70vw;
+    }
+
+    .header-contents {
+        max-width: 80%;
+        bottom: 10%;
+    }
+
+    .header-contents h2 {
+        font-size: 16px;
     }
 }
