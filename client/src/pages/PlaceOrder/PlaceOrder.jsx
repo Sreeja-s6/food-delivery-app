@@ -108,30 +108,19 @@ function PlaceOrder() {
         <p className="title">Delivery Information</p>
 
         <textarea
+          className="place-order-textarea"
           placeholder="Enter full delivery address"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           required
-          style={{
-            width: "100%",
-            height: "120px",
-            padding: "10px",
-            border: "1px solid #c5c5c5",
-            borderRadius: "4px"
-          }}
         />
 
         <p style={{ marginTop: "20px", fontWeight: "600" }}>Payment Method</p>
 
         <select
+          className="place-order-select"
           value={paymentMethod}
           onChange={(e) => setPaymentMethod(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginTop: "10px",
-            borderRadius: "4px"
-          }}
         >
           <option value="COD">Cash on Delivery</option>
           <option value="ONLINE">Online Payment</option>

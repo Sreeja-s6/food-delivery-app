@@ -15,3 +15,24 @@
     row-gap: 50px;
 }
 
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .food-display-list {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+        row-gap: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .food-display-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        row-gap: 25px;
+    }
+
+    .food-display h2 {
+        font-size: 20px;
+    }
+}
+

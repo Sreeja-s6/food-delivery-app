@@ -34,7 +34,6 @@ function Cart() {
             <p>Remove</p>
           </div>
 
-          <br />
           <hr />
 
           {food_list.map((item) => {
@@ -43,7 +42,7 @@ function Cart() {
                 <div key={item._id}>
                   <div className="cart-items-title cart-items-item">
                     <img
-                      src={`${import.meta.env.VITE_API_URL}/uploads/${item.image}`}
+                      src={item.image}
                       alt={item.name}
                     />
                     <p>{item.name}</p>

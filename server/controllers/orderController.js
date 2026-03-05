@@ -28,6 +28,7 @@ exports.placeOrder = async (req, res) => {
             return {
                 food: item.food._id,
                 quantity: item.quantity,
+                price: item.food.price
             };
         });
 

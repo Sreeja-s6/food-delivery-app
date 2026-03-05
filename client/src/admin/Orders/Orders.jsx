@@ -218,7 +218,7 @@ const AdminOrders = () => {
                             <span className="ao-item-name">{item.food?.name || "Item"}</span>
                             <span className="ao-item-qty">× {item.quantity}</span>
                             <span className="ao-item-price">
-                              ₹{(item.food?.price || 0) * item.quantity}
+                              ₹{(item.price || item.food?.price || 0) * item.quantity}
                             </span>
                           </div>
                         ))}

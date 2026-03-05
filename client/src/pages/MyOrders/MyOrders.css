@@ -333,6 +333,19 @@
   border-top: 1px dashed #2a2a4e;
 }
 
+/* ===== ADDITIONAL DARK MODE FIXES ===== */
+.order-card.dark .order-date {
+    color: #777;
+}
+
+.order-card.dark .food-qty {
+    color: #777;
+}
+
+.order-card.dark .order-tracking {
+    background: #151528;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .my-orders-container {
@@ -361,4 +374,60 @@
   .order-delivery-info {
     font-size: 13px;
   }
+}
+
+@media (max-width: 480px) {
+    .my-orders-container {
+        padding: 15px 10px;
+    }
+
+    .page-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .order-card {
+        padding: 15px;
+    }
+
+    .order-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .order-id {
+        font-size: 11px;
+        word-break: break-all;
+    }
+
+    .tracking-dot {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+    }
+
+    .tracking-label {
+        font-size: 8px;
+    }
+
+    .order-item {
+        gap: 10px;
+    }
+
+    .order-item img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .food-name {
+        font-size: 13px;
+    }
+
+    .footer-row {
+        font-size: 13px;
+    }
+
+    .footer-row.total {
+        font-size: 15px;
+    }
 }

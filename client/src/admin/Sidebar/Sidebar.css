@@ -6,8 +6,8 @@
 }
 
 .sidebar-options {
-    padding-top: 20px;      /* ✅ reduced from 50px */
-    padding-left: 20%;
+    padding-top: 20px;
+    padding-left: 15%;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -53,8 +53,53 @@
     color: tomato;
 }
 
-@media (max-width: 900px) {
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1050px) {
+    .sidebar {
+        width: 20%;
+    }
+
+    .sidebar-options {
+        padding-left: 10%;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 60px;        /* ✅ icon only on tablet */
+        min-width: 60px;
+    }
+
+    .sidebar-options {
+        padding-left: 10px;
+        padding-top: 15px;
+        align-items: center;
+    }
+
+    .sidebar-option {
+        justify-content: center;
+        padding: 8px;
+        border: 1px solid #a9a9a9;
+        border-radius: 4px;
+    }
+
     .sidebar-option p {
-        display: none;
+        display: none;      /* ✅ hide text on tablet */
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 50px;
+        min-width: 50px;
+    }
+
+    .sidebar-options {
+        padding-left: 5px;
+        gap: 15px;
+    }
+
+    .sidebar-option img {
+        width: 22px !important;
     }
 }

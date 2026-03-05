@@ -2,38 +2,54 @@
     margin-top: 100px;
 }
 
+/* ===== TABLE HEADER ===== */
 .cart-items-title {
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 0.5fr;
     align-items: center;
     color: grey;
-    font-size: max(1vw,12px);
+    font-size: max(1vw, 12px);
+    padding: 10px 0;
+    margin-top: 80px;  
 }
 
+/* ===== TABLE ROWS ===== */
 .cart-items-item {
     margin: 10px 0px;
     color: black;
+    padding: 10px 0;
 }
 
 .cart-items-item img {
     width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
+/* ===== HR LINES ===== */
 .cart hr {
-    height: 1px;
+    height: 1.5px;          
     background-color: #e2e2e2;
     border: none;
+    display: block;
+    width: 100%;
+    margin: 0;
 }
 
 .cart-items-item .cross {
     cursor: pointer;
+    color: tomato;
+    font-weight: bold;
+    font-size: 18px;
 }
 
+/* ===== CART BOTTOM ===== */
 .cart-bottom {
     margin-top: 80px;
     display: flex;
     justify-content: space-between;
-    gap: max(12vw,20px);
+    gap: max(12vw, 20px);
 }
 
 .cart-total {
@@ -41,6 +57,11 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.cart-total h2 {
+    font-size: 24px;
+    font-weight: 600;
 }
 
 .cart-total-details {
@@ -51,37 +72,153 @@
 
 .cart-total hr {
     margin: 10px 0px;
+    height: 1px;
+    background-color: #e2e2e2;
+    border: none;
 }
 
 .cart-total button {
     border: none;
     color: white;
     background-color: tomato;
-    width: max(15vw,200px);
+    width: max(15vw, 200px);
     padding: 12px 0px;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s;
 }
 
+.cart-total button:hover {
+    background-color: #e64a19;
+}
+
+/* ===== EMPTY CART ===== */
 .empty-cart {
-  margin-top: 120px;
-  text-align: center;
-  color: #555;
+    margin-top: 120px;
+    text-align: center;
+    color: #555;
 }
 
 .empty-cart h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
+    font-size: 28px;
+    margin-bottom: 10px;
 }
 
 button:disabled {
-  background-color: grey;
-  cursor: not-allowed;
+    background-color: grey;
+    cursor: not-allowed;
 }
 
+/* ===== DARK MODE ===== */
+body.dark-mode .cart-items-item {
+    color: #e0e0e0 !important;
+}
 
-@media (max-width:750px) {
+body.dark-mode .cart-items-title {
+    color: #aaaaaa;
+}
+
+body.dark-mode .cart hr {
+    background-color: #333;
+}
+
+body.dark-mode .cart-total hr {
+    background-color: #333;
+}
+
+body.dark-mode .cart-total-details {
+    color: #aaaaaa;
+}
+
+body.dark-mode .cart-total h2 {
+    color: #e0e0e0;
+}
+
+body.dark-mode .empty-cart {
+    color: #aaaaaa;
+}
+
+body.dark-mode .empty-cart h2 {
+    color: #e0e0e0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .cart {
+        margin-top: 60px;
+    }
+
+    .cart-items-title {
+        grid-template-columns: 80px 1.5fr 1fr 30px;
+        font-size: 12px;
+    }
+
+    .cart-items-item {
+        grid-template-columns: 80px 1.5fr 1fr 30px;
+    }
+
+    .cart-items-item p:nth-child(3),
+    .cart-items-item p:nth-child(4) {
+        display: none;
+    }
+
+    .cart-items-title:not(.cart-items-item) p:nth-child(3),
+    .cart-items-title:not(.cart-items-item) p:nth-child(4) {
+        display: none;
+    }
+
+    .cart-items-item img {
+        width: 70px;
+        height: 70px;
+    }
+
     .cart-bottom {
-        flex-direction: column-reverse;
+        margin-top: 50px;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .cart-total button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart {
+        margin-top: 40px;
+    }
+
+    .cart-items-title {
+        grid-template-columns: 60px 1fr 1fr 30px;
+        font-size: 11px;
+    }
+
+    .cart-items-item {
+        grid-template-columns: 60px 1fr 1fr 30px;
+    }
+
+    .cart-items-item p:nth-child(3),
+    .cart-items-item p:nth-child(4) {
+        display: none;
+    }
+
+    .cart-items-title:not(.cart-items-item) p:nth-child(3),
+    .cart-items-title:not(.cart-items-item) p:nth-child(4) {
+        display: none;
+    }
+
+    .cart-items-item img {
+        width: 55px;
+        height: 55px;
+    }
+
+    .cart-total h2 {
+        font-size: 20px;
+    }
+
+    .empty-cart h2 {
+        font-size: 22px;
     }
 }

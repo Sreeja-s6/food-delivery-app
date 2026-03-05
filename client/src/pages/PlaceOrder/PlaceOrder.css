@@ -8,7 +8,7 @@
 
 .place-order-left {
     width: 100%;
-    max-width: max(30%,500px);
+    max-width: max(30%, 500px);
 }
 
 .place-order-left .title {
@@ -33,9 +33,131 @@
 
 .place-order-right {
     width: 100%;
-    max-width: max(40%,500px);
+    max-width: max(40%, 500px);
 }
 
 .place-order .cart-total button {
     margin-top: 30px;
+}
+
+/* ===== TEXTAREA & SELECT ===== */
+.place-order-textarea {
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    border: 1px solid #c5c5c5;
+    border-radius: 4px;
+    outline-color: tomato;
+    resize: vertical;
+    font-family: Outfit;
+    font-size: 14px;
+}
+
+.place-order-select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+    border: 1px solid #c5c5c5;
+    cursor: pointer;
+    font-family: Outfit;
+    font-size: 14px;
+    outline-color: tomato;
+}
+
+/* ===== DARK MODE ===== */
+body.dark-mode .place-order-left .title {
+    color: #e0e0e0;
+}
+
+body.dark-mode .place-order-left p {
+    color: #e0e0e0;
+}
+
+body.dark-mode .place-order-left input {
+    background-color: #1e1e2e;
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+body.dark-mode .place-order-textarea,
+body.dark-mode .place-order-select {
+    background-color: #1e1e2e;
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+body.dark-mode .cart-total h2 {
+    color: #e0e0e0;
+}
+
+body.dark-mode .cart-total-details {
+    color: #aaaaaa;
+}
+
+body.dark-mode .cart-total hr {
+    background-color: #333;
+    border: none;
+    height: 1px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .place-order {
+        flex-direction: column;
+        margin-top: 60px;
+        gap: 30px;
+    }
+
+    .place-order-left {
+        max-width: 100%;
+    }
+
+    .place-order-right {
+        max-width: 100%;
+    }
+
+    .place-order-left .title {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+
+    .place-order .cart-total button {
+        width: 100%;
+    }
+
+    .place-order-textarea {
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .place-order {
+        margin-top: 40px;
+        gap: 20px;
+    }
+
+    .place-order-left .title {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .place-order-left .multi-fields {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .place-order .cart-total button {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .place-order-textarea {
+        height: 90px;
+        font-size: 13px;
+    }
+
+    .place-order-select {
+        font-size: 13px;
+    }
 }

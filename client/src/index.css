@@ -49,6 +49,7 @@ a {
 .app-content {
   display: flex;
   border-top: 1.5px solid #e0e0e0;
+  min-height: calc(100vh - 70px);
 }
 
 @keyframes fadeIn {

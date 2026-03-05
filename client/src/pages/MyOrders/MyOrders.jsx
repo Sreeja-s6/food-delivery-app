@@ -160,7 +160,7 @@ function MyOrders() {
                 return (
                   <div key={item._id} className="order-item">
                     <img
-                      src={`${import.meta.env.VITE_API_URL}/uploads/${item.food.image}`}
+                      src={item.food.image}
                       alt={item.food.name}
                       onError={(e) => e.target.style.display = "none"}
                     />
