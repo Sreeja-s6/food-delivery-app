@@ -8,10 +8,9 @@ const foodSchema = new mongoose.Schema({
     image: {
         type: String,
         required: true
-        // Now stores Cloudinary URL instead of filename
     },
     imagePublicId: {
-        type: String  // ✅ Cloudinary public_id for deletion
+        type: String  //  Cloudinary public_id for deletion
     },
     available: { type: Boolean, default: true },
     createdBy: {
